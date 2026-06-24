@@ -67,6 +67,41 @@
   }
 }
 
+/* ─── Holographic card border ────────────────────────────────────────────── */
+@keyframes holo-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* Parent must be: relative isolate, no overflow:hidden */
+.holo-border-layer {
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    #00f0ff 0%,
+    #a855f7 20%,
+    #ec4899 38%,
+    #f97316 55%,
+    #eab308 70%,
+    #00f0ff 100%
+  );
+  background-size: 400% 400%;
+  animation: holo-shift 6s ease infinite;
+  opacity: 0.4;
+  z-index: -1;
+  transition: opacity 0.35s ease, box-shadow 0.35s ease;
+}
+
+.holo-card:hover .holo-border-layer {
+  opacity: 1;
+  box-shadow:
+    0 0 16px var(--accent-glow),
+    0 0 40px rgba(168, 85, 247, 0.25),
+    0 0 60px var(--accent-glow);
+}
+
 /* ─── Arc reactor animations ─────────────────────────────────────────────── */
 @keyframes arc-spin {
   to { transform: rotate(360deg); }
