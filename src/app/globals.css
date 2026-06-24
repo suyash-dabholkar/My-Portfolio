@@ -67,6 +67,23 @@
   }
 }
 
+/* ─── Arc reactor animations ─────────────────────────────────────────────── */
+@keyframes arc-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes arc-pulse {
+  0%, 100% { opacity: 1;   filter: drop-shadow(0 0 4px var(--accent)); }
+  50%       { opacity: 0.6; filter: drop-shadow(0 0 10px var(--accent)); }
+}
+
+.arc-reactor-ring {
+  transform-origin: 18px 18px;  /* SVG viewBox centre */
+  animation: arc-spin 8s linear infinite;
+}
+.arc-reactor-pulse {
+  animation: arc-pulse 2.4s ease-in-out infinite;
+}
+
 /* ─── Utilities ───────────────────────────────────────────────────────────── */
 @layer utilities {
   .text-balance {
