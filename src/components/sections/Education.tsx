@@ -9,68 +9,7 @@ import {
   RiCalendarLine,
 } from "react-icons/ri";
 import SectionHeading from "@/components/ui/SectionHeading";
-
-/* ─── Data ───────────────────────────────────────────────────────────────── */
-interface EduEntry {
-  id: string;
-  type: "current" | "past";
-  degree: string;
-  institution: string;
-  period: string;
-  location?: string;
-  status?: string;
-  cgpa?: string;
-  cgpaNum?: number;   // 0-100 for bar width
-  board?: string;
-  score?: string;
-  courses?: string[];
-  highlights?: string[];
-}
-
-const entries: EduEntry[] = [
-  {
-    id: "vit",
-    type: "current",
-    degree: "B.Tech — Computer Science & Engineering",
-    institution: "Vellore Institute of Technology (VIT)",
-    location: "Vellore, Tamil Nadu",
-    period: "2022 – 2026",
-    status: "3rd Year",
-    cgpa: "9.xx / 10",
-    cgpaNum: 94,
-    courses: [
-      "Data Structures & Algorithms",
-      "Operating Systems",
-      "DBMS",
-      "Computer Networks",
-      "Machine Learning",
-      "Web Technologies",
-    ],
-    highlights: [
-      "Dean's List — consecutive semesters",
-      "Finalist — Smart India Hackathon 2024",
-      "Core member — [Your Tech Club / Society]",
-    ],
-  },
-  {
-    id: "xii",
-    type: "past",
-    degree: "Class XII — Science (PCM + Computer Science)",
-    institution: "Your School Name",
-    period: "2020 – 2022",
-    board: "CBSE",
-    score: "XX.X%",
-  },
-  {
-    id: "x",
-    type: "past",
-    degree: "Class X",
-    institution: "Your School Name",
-    period: "2018 – 2020",
-    board: "CBSE",
-    score: "XX.X%",
-  },
-];
+import { EDUCATION_ENTRIES, type EduEntry } from "@/lib/data";
 
 /* ─── Timeline node with double-ring pulse ───────────────────────────────── */
 function TimelineNode({ active }: { active: boolean }) {
@@ -294,7 +233,7 @@ export default function Education() {
 
         {/* ── Entries ──────────────────────────────────────────────── */}
         <div>
-          {entries.map((entry, i) => (
+          {EDUCATION_ENTRIES.map((entry, i) => (
             <motion.div
               key={entry.id}
               initial={{ opacity: 0, x: 24 }}

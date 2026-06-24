@@ -3,21 +3,9 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { RiMapPinLine, RiCodeSSlashLine, RiCupLine, RiUserLine } from "react-icons/ri";
+import { RiUserLine } from "react-icons/ri";
 import SectionHeading from "@/components/ui/SectionHeading";
-
-/* ─── Data ───────────────────────────────────────────────────────────────── */
-const stats = [
-  { value: "3+",  label: "Years Coding"     },
-  { value: "20+", label: "Projects Built"   },
-  { value: "10+", label: "Technologies"     },
-];
-
-const tags = [
-  { icon: RiMapPinLine,       text: "Pune, India"            },
-  { icon: RiCodeSSlashLine,   text: "Open Source"            },
-  { icon: RiCupLine,          text: "Coffee-Driven"          },
-];
+import { ABOUT_STATS, ABOUT_TAGS } from "@/lib/data";
 
 /* ─── Profile card (holographic border + 3-D tilt + mouse shine) ─────────── */
 function ProfileCard() {
@@ -145,20 +133,20 @@ export default function About() {
           <div className="space-y-4 text-fg-muted leading-relaxed">
             <p>
               I&apos;m{" "}
-              <span className="text-fg font-semibold">Suyash Dabholkar</span>, a full-stack
-              developer who loves turning bold ideas into polished digital products. I obsess
-              over clean architecture, pixel-perfect UIs, and the invisible details that make
-              an experience feel right.
+              <span className="text-fg font-semibold">Suyash Dabholkar</span>, a second-year
+              B.Tech CSE student at VIT Vellore with deep interests in Artificial Intelligence,
+              Machine Learning, Data Science, and Robotics.
             </p>
             <p>
-              When I&apos;m not building, you&apos;ll find me diving into open source,
-              exploring new frameworks, or hunting the perfect pour-over ratio.
+              I focus on building real-world, data-driven solutions by combining intelligent
+              software with hardware — turning ideas into prototypes that solve problems worth
+              solving.
             </p>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-3">
-            {stats.map(({ value, label }) => (
+            {ABOUT_STATS.map(({ value, label }) => (
               <motion.div
                 key={label}
                 whileHover={{ y: -2 }}
@@ -173,7 +161,7 @@ export default function About() {
 
           {/* Quick-fact tags */}
           <div className="flex flex-wrap gap-2">
-            {tags.map(({ icon: Icon, text }) => (
+            {ABOUT_TAGS.map(({ icon: Icon, text }) => (
               <span
                 key={text}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border bg-bg-secondary text-xs text-fg-muted"

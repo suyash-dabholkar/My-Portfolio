@@ -1,48 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  RiMailLine,
-  RiLinkedinLine,
-  RiGithubLine,
-  RiArrowRightLine,
-} from "react-icons/ri";
+import { RiArrowRightLine } from "react-icons/ri";
 import SectionHeading from "@/components/ui/SectionHeading";
-
-/* ─── Data ───────────────────────────────────────────────────────────────── */
-const LINKS = [
-  {
-    id: "email",
-    icon: RiMailLine,
-    label: "Email",
-    handle: "suyashdabholkar@gmail.com",
-    href: "mailto:suyashdabholkar@gmail.com",
-    external: false,
-  },
-  {
-    id: "linkedin",
-    icon: RiLinkedinLine,
-    label: "LinkedIn",
-    handle: "linkedin.com/in/suyashdabholkar",
-    href: "https://linkedin.com/in/suyashdabholkar",
-    external: true,
-  },
-  {
-    id: "github",
-    icon: RiGithubLine,
-    label: "GitHub",
-    handle: "github.com/suyashdabholkar",
-    href: "https://github.com/suyashdabholkar",
-    external: true,
-  },
-] as const;
+import { CONTACT_LINKS, type ContactLink } from "@/lib/data";
 
 /* ─── HUD link button ────────────────────────────────────────────────────── */
 function LinkButton({
   link,
   index,
 }: {
-  link: (typeof LINKS)[number];
+  link: ContactLink;
   index: number;
 }) {
   const Icon = link.icon;
@@ -134,7 +102,7 @@ export default function Contact() {
 
       {/* Link buttons */}
       <div className="space-y-3">
-        {LINKS.map((link, i) => (
+        {CONTACT_LINKS.map((link, i) => (
           <LinkButton key={link.id} link={link} index={i} />
         ))}
       </div>

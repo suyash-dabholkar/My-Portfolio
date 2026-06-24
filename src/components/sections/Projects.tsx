@@ -10,85 +10,7 @@ import {
   RiRefreshLine,
 } from "react-icons/ri";
 import SectionHeading from "@/components/ui/SectionHeading";
-
-/* ─── Data ───────────────────────────────────────────────────────────────── */
-interface ProjectItem {
-  id: string;
-  name: string;
-  tagline: string;
-  description: string;
-  screenshot?: string;
-  github: string;
-  demo?: string;
-  stack: string[];
-}
-
-const PROJECTS: ProjectItem[] = [
-  {
-    id: "portfolio",
-    name: "JARVIS Portfolio",
-    tagline: "HUD-themed developer portfolio",
-    description:
-      "Interactive personal portfolio with a JARVIS-style boot animation, particle canvas, 3D holographic cards, and full dark / light HUD theming built with Next.js 14.",
-    screenshot: "/images/projects/portfolio.png",
-    github: "https://github.com/suyash/portfolio",
-    demo: "https://suyashdabholkar.dev",
-    stack: ["Next.js 14", "TypeScript", "Framer Motion", "Tailwind CSS"],
-  },
-  {
-    id: "chat-app",
-    name: "Real-Time Chat",
-    tagline: "WebSocket messaging platform",
-    description:
-      "Full-stack chat app with real-time messaging, typing indicators, read receipts, room-based channels, and JWT authentication. Handles 500+ concurrent users.",
-    screenshot: "/images/projects/chat.png",
-    github: "https://github.com/suyash/chat-app",
-    demo: "https://chat-demo.vercel.app",
-    stack: ["React", "Node.js", "Socket.io", "MongoDB"],
-  },
-  {
-    id: "ml-api",
-    name: "Image Classifier API",
-    tagline: "CNN-powered REST API",
-    description:
-      "REST API wrapping a convolutional neural network trained on CIFAR-10. Classifies uploaded images with per-class confidence scores in under 100 ms, containerised via Docker.",
-    screenshot: "/images/projects/ml-api.png",
-    github: "https://github.com/suyash/image-classifier",
-    stack: ["Python", "FastAPI", "TensorFlow", "Docker"],
-  },
-  {
-    id: "expense-tracker",
-    name: "Expense Tracker",
-    tagline: "Personal finance dashboard",
-    description:
-      "Full-stack expense tracker with budget categories, monthly trend charts, recurring transactions, and CSV export. Built with a responsive, data-rich dashboard.",
-    screenshot: "/images/projects/expense.png",
-    github: "https://github.com/suyash/expense-tracker",
-    demo: "https://expenses-demo.vercel.app",
-    stack: ["React", "TypeScript", "PostgreSQL", "Express"],
-  },
-  {
-    id: "cli-tool",
-    name: "Dev CLI Toolkit",
-    tagline: "Node.js scaffolding CLI",
-    description:
-      "CLI to scaffold full-stack projects with opinionated defaults — generates folder structure, ESLint config, Docker setup, Husky hooks, and a filled-in README.",
-    screenshot: "/images/projects/cli.png",
-    github: "https://github.com/suyash/dev-cli",
-    stack: ["TypeScript", "Node.js", "Commander.js", "Inquirer"],
-  },
-  {
-    id: "weather-dash",
-    name: "Weather Dashboard",
-    tagline: "Real-time forecast + radar",
-    description:
-      "Weather app with geolocation, 7-day forecast, animated radar maps, and air quality index. Fans three third-party APIs simultaneously with SWR caching.",
-    screenshot: "/images/projects/weather.png",
-    github: "https://github.com/suyash/weather-app",
-    demo: "https://weather-demo.vercel.app",
-    stack: ["Next.js", "OpenWeather API", "Mapbox GL", "SWR"],
-  },
-];
+import { PROJECTS, type ProjectItem } from "@/lib/data";
 
 /* ─── Screenshot placeholder ─────────────────────────────────────────────── */
 function Placeholder() {
@@ -308,15 +230,21 @@ function ProjectCard({ project, index }: { project: ProjectItem; index: number }
 
             {/* Buttons */}
             <div className="mt-3 flex gap-2 shrink-0">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-border-accent text-accent text-[11px] font-medium hover:bg-accent hover:text-bg hover:shadow-glow transition-all duration-200"
-              >
-                <RiGithubLine size={13} />
-                GitHub
-              </a>
+              {project.github !== "#" ? (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg border border-border-accent text-accent text-[11px] font-medium hover:bg-accent hover:text-bg hover:shadow-glow transition-all duration-200"
+                >
+                  <RiGithubLine size={13} />
+                  GitHub
+                </a>
+              ) : (
+                <div className="flex-1 flex items-center justify-center py-2 rounded-lg border border-border text-fg-muted text-[11px] opacity-40 cursor-default select-none">
+                  No repo
+                </div>
+              )}
               {project.demo ? (
                 <a
                   href={project.demo}

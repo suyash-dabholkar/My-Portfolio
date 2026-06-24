@@ -265,10 +265,10 @@ export default function Hero() {
               className="space-y-4 w-full"
             >
               <p className="text-base sm:text-lg md:text-xl text-fg-muted">
-                Full-Stack Developer &amp; Designer
+                AI &amp; ML · Robotics · Full-Stack
               </p>
               <p className="text-sm text-fg-muted max-w-md mx-auto">
-                I build fast, accessible, and beautiful web experiences.
+                Building data-driven solutions at the intersection of intelligent software and hardware.
               </p>
 
               {/* Buttons */}

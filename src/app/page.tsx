@@ -2,6 +2,7 @@ import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Education from "@/components/sections/Education";
 import Experience from "@/components/sections/Experience";
+import Leadership from "@/components/sections/Leadership";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
@@ -26,6 +27,10 @@ export default function Home() {
 
       <ScrollReveal direction="fade" duration={0.6}>
         <Experience />
+      </ScrollReveal>
+
+      <ScrollReveal direction="fade" duration={0.6}>
+        <Leadership />
       </ScrollReveal>
 
       <ScrollReveal direction="fade" duration={0.6}>

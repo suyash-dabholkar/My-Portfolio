@@ -2,77 +2,12 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IconType } from "react-icons";
-import {
-  SiPython, SiJavascript, SiTypescript, SiCplusplus, SiHtml5, SiCss,
-  SiReact, SiNextdotjs, SiNodedotjs, SiExpress, SiTailwindcss, SiRedux,
-  SiMongodb, SiPostgresql, SiMysql, SiFirebase,
-  SiGit, SiGithub, SiDocker, SiLinux, SiFigma, SiPostman, SiVite,
-} from "react-icons/si";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { SKILLS_CATEGORIES, type SkillCategory, type SkillItem } from "@/lib/data";
 
-/* ─── Types ──────────────────────────────────────────────────────────────── */
-interface SkillItem {
-  name: string;
-  icon: IconType;
-  color: string;
-}
-interface Category {
-  id: string;
-  label: string;
-  skills: SkillItem[];
-}
-
-/* ─── Data ───────────────────────────────────────────────────────────────── */
-const CATEGORIES: Category[] = [
-  {
-    id: "languages",
-    label: "Languages",
-    skills: [
-      { name: "Python",     icon: SiPython,      color: "#3776AB" },
-      { name: "JavaScript", icon: SiJavascript,  color: "#F7DF1E" },
-      { name: "TypeScript", icon: SiTypescript,  color: "#3178C6" },
-      { name: "C++",        icon: SiCplusplus,   color: "#00599C" },
-      { name: "HTML5",      icon: SiHtml5,       color: "#E34F26" },
-      { name: "CSS",        icon: SiCss,         color: "#1572B6" },
-    ],
-  },
-  {
-    id: "frameworks",
-    label: "Frameworks",
-    skills: [
-      { name: "React",     icon: SiReact,       color: "#61DAFB" },
-      { name: "Next.js",   icon: SiNextdotjs,   color: "#e2e2e2" },
-      { name: "Node.js",   icon: SiNodedotjs,   color: "#339933" },
-      { name: "Express",   icon: SiExpress,     color: "#e2e2e2" },
-      { name: "Tailwind",  icon: SiTailwindcss, color: "#06B6D4" },
-      { name: "Redux",     icon: SiRedux,       color: "#764ABC" },
-    ],
-  },
-  {
-    id: "databases",
-    label: "Databases",
-    skills: [
-      { name: "MongoDB",    icon: SiMongodb,    color: "#47A248" },
-      { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
-      { name: "MySQL",      icon: SiMysql,      color: "#4479A1" },
-      { name: "Firebase",   icon: SiFirebase,   color: "#FFCA28" },
-    ],
-  },
-  {
-    id: "tools",
-    label: "Tools",
-    skills: [
-      { name: "Git",     icon: SiGit,     color: "#F05032" },
-      { name: "GitHub",  icon: SiGithub,  color: "#e2e2e2" },
-      { name: "Docker",  icon: SiDocker,  color: "#2496ED" },
-      { name: "Linux",   icon: SiLinux,   color: "#FCC624" },
-      { name: "Figma",   icon: SiFigma,   color: "#F24E1E" },
-      { name: "Postman", icon: SiPostman, color: "#FF6C37" },
-      { name: "Vite",    icon: SiVite,    color: "#646CFF" },
-    ],
-  },
-];
+// Re-export the shared types as local aliases so the rest of the file is unchanged
+type Category = SkillCategory;
+const CATEGORIES = SKILLS_CATEGORIES;
 
 /* ─── Hex geometry ───────────────────────────────────────────────────────── */
 // flat-top regular hexagon — all 6 sides ≈ equal at w:92 h:80
