@@ -102,6 +102,39 @@
     0 0 60px var(--accent-glow);
 }
 
+/* ─── Holographic back-face effects ─────────────────────────────────────── */
+.holo-scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px, transparent 3px,
+    rgba(0, 240, 255, 0.028) 3px, rgba(0, 240, 255, 0.028) 4px
+  );
+}
+html:not(.dark) .holo-scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0px, transparent 3px,
+    rgba(178, 34, 34, 0.035) 3px, rgba(178, 34, 34, 0.035) 4px
+  );
+}
+
+.holo-tint {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 240, 255, 0.05) 0%,
+    transparent 45%,
+    rgba(168, 85, 247, 0.04) 100%
+  );
+}
+html:not(.dark) .holo-tint {
+  background: linear-gradient(
+    135deg,
+    rgba(178, 34, 34, 0.04) 0%,
+    transparent 45%,
+    rgba(255, 215, 0, 0.04) 100%
+  );
+}
+
 /* ─── Arc reactor animations ─────────────────────────────────────────────── */
 @keyframes arc-spin {
   to { transform: rotate(360deg); }
