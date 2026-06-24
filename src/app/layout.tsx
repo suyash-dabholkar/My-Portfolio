@@ -4,6 +4,7 @@ import "./globals.css";
 import ThemeProvider from "@/components/layout/ThemeProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PageWrapper from "@/components/layout/PageWrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,7 +27,9 @@ export default function RootLayout({
       <body className={`${geistSans.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
-          <main>{children}</main>
+          <main>
+            <PageWrapper>{children}</PageWrapper>
+          </main>
           <Footer />
         </ThemeProvider>
       </body>

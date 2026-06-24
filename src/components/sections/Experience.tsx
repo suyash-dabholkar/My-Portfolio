@@ -151,7 +151,8 @@ function ExpCard({ entry, index }: { entry: ExpEntry; index: number }) {
 
         {/* ── Card header ──────────────────────────────────────────── */}
         <div className="px-5 pt-5 pb-4">
-          <div className="flex flex-wrap items-start justify-between gap-3">
+          {/* Stack vertically on mobile, side-by-side on sm+ */}
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-start sm:justify-between gap-2 sm:gap-3">
 
             {/* Left: role + company + location */}
             <div className="min-w-0">
@@ -173,8 +174,8 @@ function ExpCard({ entry, index }: { entry: ExpEntry; index: number }) {
               </p>
             </div>
 
-            {/* Right: period + badges */}
-            <div className="flex flex-col items-end gap-1.5 shrink-0">
+            {/* Right: period + badges — left-aligned on mobile, right-aligned on sm+ */}
+            <div className="flex flex-col items-start sm:items-end gap-1.5 ml-6 sm:ml-0">
               <span className="flex items-center gap-1.5 font-mono text-xs border border-border-accent text-accent px-3 py-1 rounded-full">
                 <RiCalendarLine size={11} />
                 {entry.period}

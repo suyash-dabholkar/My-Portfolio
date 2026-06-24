@@ -5,17 +5,40 @@ import Experience from "@/components/sections/Experience";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function Home() {
   return (
     <>
+      {/* Hero has its own coordinated boot-sequence — no scroll wrapper needed */}
       <Hero />
-      <About />
-      <Education />
-      <Experience />
-      <Skills />
-      <Projects />
-      <Contact />
+
+      {/* Every section below the fold fades + slides up as it enters the viewport.
+          The `fade` direction keeps the section's internal y-animations additive-free;
+          each section's own child elements handle their staggered slide-ups independently. */}
+      <ScrollReveal direction="fade" duration={0.6}>
+        <About />
+      </ScrollReveal>
+
+      <ScrollReveal direction="fade" duration={0.6}>
+        <Education />
+      </ScrollReveal>
+
+      <ScrollReveal direction="fade" duration={0.6}>
+        <Experience />
+      </ScrollReveal>
+
+      <ScrollReveal direction="fade" duration={0.6}>
+        <Skills />
+      </ScrollReveal>
+
+      <ScrollReveal direction="fade" duration={0.6}>
+        <Projects />
+      </ScrollReveal>
+
+      <ScrollReveal direction="fade" duration={0.6}>
+        <Contact />
+      </ScrollReveal>
     </>
   );
 }

@@ -36,11 +36,27 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Offset for sticky navbar when jumping to anchor links */
+    scroll-padding-top: 72px;
   }
 
   body {
     background-color: var(--bg);
     color: var(--fg);
+    /* Prevent horizontal overflow from off-screen animation starting positions */
+    overflow-x: hidden;
+  }
+
+  /* Reserve space so sections don't scroll behind the navbar */
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+
+  /* Responsive media defaults */
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
   }
 
   /* Cyan grid lines only in dark mode */
