@@ -17,15 +17,15 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="p-6 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-indigo-400 dark:hover:border-indigo-500 transition-colors group"
+            className="p-6 rounded-xl border border-border bg-bg-card hover:border-accent hover:shadow-glow transition-all group"
           >
             <h3 className="font-semibold text-lg mb-2">{project.title}</h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{project.description}</p>
+            <p className="text-fg-muted text-sm mb-4">{project.description}</p>
             <div className="flex flex-wrap gap-2 mb-4">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs px-2 py-1 rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300"
+                  className="text-xs px-2 py-1 rounded border border-border-accent text-accent bg-bg-secondary"
                 >
                   {tag}
                 </span>
@@ -37,7 +37,7 @@ export default function Projects() {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+                  className="flex items-center gap-1 text-sm text-fg-muted hover:text-accent transition-colors"
                 >
                   <RiGithubLine size={16} /> Code
                 </a>
@@ -47,7 +47,7 @@ export default function Projects() {
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-sm text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  className="flex items-center gap-1 text-sm text-fg-muted hover:text-accent transition-colors"
                 >
                   <RiExternalLinkLine size={16} /> Live
                 </a>

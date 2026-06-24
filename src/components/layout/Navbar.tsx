@@ -11,9 +11,9 @@ export default function Navbar() {
   const activeId = useScrollSpy(navLinks.map((l) => l.href.replace("#", "")));
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur border-b border-gray-200 dark:border-gray-800">
+    <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md border-b border-border bg-bg/80">
       <nav className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="font-bold text-lg tracking-tight">
+        <Link href="/" className="font-bold text-lg tracking-tight text-accent">
           Suyash.
         </Link>
 
@@ -22,10 +22,10 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`transition-colors hover:text-indigo-600 dark:hover:text-indigo-400 ${
+                className={`transition-colors hover:text-accent link-accent ${
                   activeId === link.href.replace("#", "")
-                    ? "text-indigo-600 dark:text-indigo-400"
-                    : "text-gray-600 dark:text-gray-400"
+                    ? "text-accent"
+                    : "text-fg-muted"
                 }`}
               >
                 {link.label}
@@ -36,7 +36,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          className="p-2 rounded-md text-fg-muted hover:text-accent hover:bg-bg-secondary transition-colors"
           aria-label="Toggle theme"
         >
           {theme === "dark" ? <RiSunLine size={18} /> : <RiMoonLine size={18} />}

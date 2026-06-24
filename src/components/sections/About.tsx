@@ -12,7 +12,7 @@ export default function About() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="mt-8 grid md:grid-cols-2 gap-10 text-gray-600 dark:text-gray-400"
+        className="mt-8 grid md:grid-cols-2 gap-10 text-fg-muted"
       >
         <p>
           I&apos;m a passionate developer who loves turning ideas into real products. I focus on

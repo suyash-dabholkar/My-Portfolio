@@ -21,7 +21,7 @@ export default function Skills() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 text-sm font-medium bg-gray-50 dark:bg-gray-900"
+            className="px-4 py-2 rounded-full border border-border-accent text-accent bg-bg-card text-sm font-medium hover:shadow-glow transition-shadow"
           >
             {skill.name}
           </motion.span>
