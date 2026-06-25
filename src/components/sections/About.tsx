@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { RiUserLine } from "react-icons/ri";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { ABOUT_STATS, ABOUT_TAGS } from "@/lib/data";
+import { ABOUT_TAGS } from "@/lib/data";
 
 /* ─── Profile card (holographic border + 3-D tilt + mouse shine) ─────────── */
 function ProfileCard() {
@@ -142,21 +142,6 @@ export default function About() {
               software with hardware — turning ideas into prototypes that solve problems worth
               solving.
             </p>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-3">
-            {ABOUT_STATS.map(({ value, label }) => (
-              <motion.div
-                key={label}
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.15 }}
-                className="p-4 rounded-xl border border-border-accent bg-bg-card text-center"
-              >
-                <p className="text-2xl font-bold text-accent leading-none">{value}</p>
-                <p className="text-[11px] text-fg-muted mt-1 leading-tight">{label}</p>
-              </motion.div>
-            ))}
           </div>
 
           {/* Quick-fact tags */}

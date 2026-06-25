@@ -5,156 +5,129 @@ import { motion, AnimatePresence } from "framer-motion";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { SKILLS_CATEGORIES, type SkillCategory, type SkillItem } from "@/lib/data";
 
-// Re-export the shared types as local aliases so the rest of the file is unchanged
 type Category = SkillCategory;
 const CATEGORIES = SKILLS_CATEGORIES;
 
-/* ─── Hex geometry ───────────────────────────────────────────────────────── */
-// flat-top regular hexagon — all 6 sides ≈ equal at w:92 h:80
-const HEX = "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)";
-const CARD_W = 92;
-const CARD_H = 80;
-
-/* ─── Individual hex card ────────────────────────────────────────────────── */
-function HexCard({ skill, delay }: { skill: SkillItem; delay: number }) {
+/* ─── Individual skill chip ──────────────────────────────────────────────── */
+function SkillChip({ skill, index }: { skill: SkillItem; index: number }) {
   const [hovered, setHovered] = useState(false);
   const Icon = skill.icon;
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.55, y: 12 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      initial={{ opacity: 0, y: 14, scale: 0.92 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.32, delay, ease: [0.34, 1.56, 0.64, 1] }}
+      transition={{ duration: 0.3, delay: index * 0.03, ease: "easeOut" }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className="relative shrink-0 cursor-default select-none"
-      style={{ width: CARD_W, height: CARD_H }}
+      className="flex items-center gap-3 px-4 py-3 rounded-lg cursor-default select-none"
+      style={{
+        background: "var(--bg-card)",
+        border: "1px solid var(--border)",
+        borderLeft: `3px solid ${skill.color}`,
+        boxShadow: hovered
+          ? `0 6px 22px ${skill.color}28, 0 0 0 1px ${skill.color}38`
+          : "0 1px 6px rgba(0,0,0,0.12)",
+        transform: hovered ? "translateY(-3px)" : "translateY(0px)",
+        transition: "transform 0.2s ease, box-shadow 0.2s ease",
+      }}
     >
-      {/* Outer hex — border layer; glows on hover */}
-      <div
-        className="absolute inset-0"
-        style={{
-          clipPath: HEX,
-          background: hovered ? "var(--accent)" : "var(--border-accent)",
-          filter: hovered
-            ? "drop-shadow(0 0 6px var(--accent)) drop-shadow(0 0 18px var(--accent-glow))"
-            : "none",
-          transition: "background 0.22s ease, filter 0.22s ease",
-        }}
-      />
-
-      {/* Inner hex — card background */}
-      <div
-        className="absolute flex flex-col items-center justify-center"
-        style={{
-          inset: "2px",
-          clipPath: HEX,
-          gap: "5px",
-          background: hovered ? "var(--bg-secondary)" : "var(--bg-card)",
-          transition: "background 0.22s ease",
-        }}
+      {/* Icon — wiggles + colorizes on hover */}
+      <motion.div
+        animate={hovered ? { rotate: [0, -8, 8, -4, 0] } : { rotate: 0 }}
+        transition={{ duration: 0.35 }}
+        style={{ flexShrink: 0 }}
       >
         <Icon
-          size={26}
+          size={19}
           style={{
             color: hovered ? skill.color : "var(--fg-muted)",
-            transition: "color 0.22s ease",
-            flexShrink: 0,
+            filter: hovered ? `drop-shadow(0 0 5px ${skill.color})` : "none",
+            transition: "color 0.2s ease, filter 0.2s ease",
           }}
         />
-        <span
-          style={{
-            color: hovered ? "var(--fg)" : "var(--fg-muted)",
-            transition: "color 0.22s ease",
-            fontSize: "9.5px",
-            fontWeight: 500,
-            lineHeight: 1.2,
-            textAlign: "center",
-            maxWidth: "68px",
-          }}
-        >
-          {skill.name}
-        </span>
-      </div>
+      </motion.div>
+
+      <span
+        className="text-[13px] font-medium leading-none whitespace-nowrap"
+        style={{
+          color: hovered ? "var(--fg)" : "var(--fg-muted)",
+          transition: "color 0.2s ease",
+        }}
+      >
+        {skill.name}
+      </span>
     </motion.div>
   );
 }
 
-/* ─── Category grid ──────────────────────────────────────────────────────── */
-function CategoryGrid({
-  category,
-  startOffset,
-}: {
-  category: Category;
-  startOffset: number;
-}) {
+/* ─── Category group ─────────────────────────────────────────────────────── */
+function CategoryGroup({ category, indexOffset }: { category: Category; indexOffset: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 14 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
     >
-      {/* Label */}
-      <div className="flex items-center gap-3 mb-5">
-        <div className="w-2 h-2 rotate-45 bg-accent shrink-0" />
-        <span className="text-[10px] font-mono tracking-[0.2em] text-fg-muted uppercase">
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-4">
+        <motion.div
+          className="w-[5px] h-[5px] rotate-45 bg-accent shrink-0"
+          animate={{ rotate: [45, 90, 45] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          style={{ boxShadow: "0 0 6px var(--accent)" }}
+        />
+        <span className="text-[11px] font-mono tracking-[0.22em] text-accent uppercase">
           {category.label}
         </span>
-        <div className="flex-1 h-px bg-gradient-to-r from-border-accent to-transparent" />
+        <div
+          className="flex-1 h-px"
+          style={{
+            background: "linear-gradient(90deg, var(--border-accent) 0%, transparent 100%)",
+            boxShadow: "0 0 4px var(--accent-glow)",
+          }}
+        />
       </div>
 
-      {/* Hex grid */}
-      <div className="flex flex-wrap gap-3">
+      {/* Chips */}
+      <div className="flex flex-wrap gap-2.5">
         {category.skills.map((skill, i) => (
-          <HexCard
-            key={skill.name}
-            skill={skill}
-            delay={startOffset * 0.045 + i * 0.05}
-          />
+          <SkillChip key={skill.name} skill={skill} index={indexOffset + i} />
         ))}
       </div>
     </motion.div>
   );
 }
 
-/* ─── Tab bar ────────────────────────────────────────────────────────────── */
+/* ─── Filter tab bar ─────────────────────────────────────────────────────── */
 const ALL_ID = "all";
 
-function TabBar({
-  active,
-  onChange,
-}: {
-  active: string;
-  onChange: (id: string) => void;
-}) {
+function TabBar({ active, onChange }: { active: string; onChange: (id: string) => void }) {
   const tabs = [
     { id: ALL_ID, label: "All" },
     ...CATEGORIES.map((c) => ({ id: c.id, label: c.label })),
   ];
 
   return (
-    <div className="flex flex-wrap gap-1 mt-8 border-b border-border pb-0">
+    <div className="flex flex-wrap gap-2 mt-8">
       {tabs.map(({ id, label }) => {
         const isActive = active === id;
         return (
           <button
             key={id}
             onClick={() => onChange(id)}
-            className={`relative px-4 py-2 text-[11px] font-mono tracking-wider uppercase transition-colors duration-200 ${
-              isActive ? "text-accent" : "text-fg-muted hover:text-accent"
-            }`}
+            className="relative px-4 py-2 rounded-full text-[11px] font-mono tracking-widest uppercase transition-all duration-200"
+            style={{
+              background: isActive ? "var(--accent)" : "var(--bg-card)",
+              color: isActive ? "var(--bg)" : "var(--fg-muted)",
+              border: `1px solid ${isActive ? "var(--accent)" : "var(--border-accent)"}`,
+              boxShadow: isActive ? "0 0 14px var(--accent-glow)" : "none",
+              fontWeight: isActive ? 600 : 400,
+            }}
           >
             {label}
-            {isActive && (
-              <motion.div
-                layoutId="tab-indicator"
-                className="absolute bottom-[-1px] inset-x-0 h-[2px] bg-accent"
-                style={{ boxShadow: "0 0 6px var(--accent)" }}
-                transition={{ type: "spring", stiffness: 420, damping: 32 }}
-              />
-            )}
           </button>
         );
       })}
@@ -171,35 +144,33 @@ export default function Skills() {
       ? CATEGORIES
       : CATEGORIES.filter((c) => c.id === activeTab);
 
-  // Per-category stagger offsets (skill count accumulated)
-  const offsets: Record<string, number> = {};
   let acc = 0;
+  const offsetMap: Record<string, number> = {};
   for (const cat of CATEGORIES) {
-    offsets[cat.id] = acc;
+    offsetMap[cat.id] = acc;
     acc += cat.skills.length;
   }
 
   return (
     <section id="skills" className="py-24 px-4 max-w-5xl mx-auto">
       <SectionHeading title="Skills" />
-
       <TabBar active={activeTab} onChange={setActiveTab} />
 
       <div className="mt-10">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.22 }}
-            className="space-y-12"
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
+            className="space-y-10"
           >
             {visible.map((cat) => (
-              <CategoryGrid
+              <CategoryGroup
                 key={cat.id}
                 category={cat}
-                startOffset={activeTab === ALL_ID ? offsets[cat.id] : 0}
+                indexOffset={activeTab === ALL_ID ? offsetMap[cat.id] : 0}
               />
             ))}
           </motion.div>

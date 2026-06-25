@@ -139,7 +139,7 @@ function HudFrame() {
 /* ─── Boot sequence data ─────────────────────────────────────────────────── */
 const STEPS: Step[] = [
   //  idx 0-2 : diagnostic lines
-  { text: "> STARK.AI BOOT SEQUENCE INITIATED",    speed: 20, pauseAfter: 80,  startDelay: 450 },
+  { text: "> SUYASH.AI BOOT SEQUENCE INITIATED",    speed: 20, pauseAfter: 80,  startDelay: 450 },
   { text: "> Loading neural interface modules...", speed: 24, pauseAfter: 80 },
   { text: "> All systems nominal.  HUD online.",   speed: 24, pauseAfter: 200 },
   //  idx 3   : progress bar (no text, just a timed pause)
@@ -147,7 +147,7 @@ const STEPS: Step[] = [
   //  idx 4-6 : JARVIS identity lines
   { text: "Initializing...",         speed: 65, pauseAfter: 680 },
   { text: "Welcome.",                speed: 95, pauseAfter: 380 },
-  { text: "I am Suyash Dabholkar.", speed: 55, pauseAfter: 950 },
+  { text: "I am Suyash Chetan Dabholkar.", speed: 55, pauseAfter: 950 },
 ];
 
 const PROGRESS_IDX = 3;

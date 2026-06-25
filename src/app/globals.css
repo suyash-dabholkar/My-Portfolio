@@ -20,16 +20,22 @@
 /* ─── Dark mode — holographic HUD ────────────────────────────────────────── */
 .dark {
   --bg:            #000000;
-  --bg-secondary:  #080808;
-  --bg-card:       #0c0c0c;
-  --fg:            #e2e2e2;
-  --fg-muted:      #666666;
+  --bg-secondary:  #060a0e;
+  --bg-card:       #080c10;
+  --fg:            #f0f0f0;   /* boosted from #e2e2e2 */
+  --fg-muted:      #a0a0a0;   /* boosted from #666666 */
   --accent:        #00f0ff;   /* cyan HUD          */
   --accent-alt:    #00c8dd;   /* dimmer cyan        */
-  --accent-glow:   rgba(0, 240, 255, 0.18);
+  --accent-glow:   rgba(0, 240, 255, 0.22);
   --border:        #1a1a1a;
-  --border-accent: rgba(0, 240, 255, 0.3);
+  --border-accent: rgba(0, 240, 255, 0.32);
   --scrollbar-thumb: #00f0ff;
+  --glass-bg:      rgba(0, 8, 18, 0.72);
+}
+
+/* ─── Light mode glass var ────────────────────────────────────────────────── */
+:root {
+  --glass-bg: rgba(255, 252, 248, 0.82);
 }
 
 /* ─── Base ────────────────────────────────────────────────────────────────── */
@@ -151,6 +157,12 @@ html:not(.dark) .holo-tint {
   );
 }
 
+/* ─── Blinking cursor (used in JARVIS intro typewriter) ─────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
 /* ─── Arc reactor animations ─────────────────────────────────────────────── */
 @keyframes arc-spin {
   to { transform: rotate(360deg); }
@@ -166,6 +178,83 @@ html:not(.dark) .holo-tint {
 }
 .arc-reactor-pulse {
   animation: arc-pulse 2.4s ease-in-out infinite;
+}
+
+/* ─── Heading glow ───────────────────────────────────────────────────────── */
+.heading-glow {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.3), 0 0 30px rgba(0, 240, 255, 0.1);
+}
+html:not(.dark) .heading-glow {
+  text-shadow: none;
+}
+
+/* ─── Jarvis skill cards ─────────────────────────────────────────────────── */
+.jarvis-skill-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-accent);
+  border-radius: 8px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 0 0 1px var(--border-accent), 0 0 8px var(--accent-glow);
+}
+
+.dark .jarvis-skill-card {
+  animation: jarvis-pulse 3.5s ease-in-out infinite;
+}
+
+.jarvis-skill-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 10px 32px var(--accent-glow),
+    inset 0 0 18px rgba(0, 240, 255, 0.06);
+}
+
+@keyframes jarvis-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px var(--border-accent), 0 0 8px var(--accent-glow); }
+  50%       { box-shadow: 0 0 0 1px var(--border-accent), 0 0 16px var(--accent-glow); }
+}
+
+/* Scan line sweep on hover */
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: -40%;
+  bottom: 0;
+  width: 36%;
+  background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+}
+.jarvis-skill-card:hover .scan-line {
+  animation: scan-sweep 0.55s ease-out forwards;
+}
+@keyframes scan-sweep {
+  0%   { left: -40%; opacity: 1; }
+  100% { left: 130%; opacity: 0; }
+}
+
+/* Skill icon / label color transitions */
+.skill-icon {
+  color: var(--fg-muted);
+  transition: color 0.22s ease, filter 0.22s ease;
+}
+.jarvis-skill-card:hover .skill-icon {
+  color: var(--accent);
+  filter: drop-shadow(0 0 5px var(--accent));
+}
+.skill-label {
+  color: var(--fg-muted);
+  transition: color 0.22s ease;
+}
+.jarvis-skill-card:hover .skill-label { color: var(--fg); }
+
+/* ─── Glow on interactive elements (dark mode) ───────────────────────────── */
+.dark a:not([class*="btn"]):hover,
+.dark nav a:hover {
+  filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.35));
 }
 
 /* ─── Utilities ───────────────────────────────────────────────────────────── */

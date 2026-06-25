@@ -5,6 +5,8 @@ import ThemeProvider from "@/components/layout/ThemeProvider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PageWrapper from "@/components/layout/PageWrapper";
+import JarvisIntro from "@/components/ui/JarvisIntro";
+import CursorGlow from "@/components/ui/CursorGlow";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,6 +28,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <JarvisIntro />
+          <CursorGlow />
           <Navbar />
           <main>
             <PageWrapper>{children}</PageWrapper>

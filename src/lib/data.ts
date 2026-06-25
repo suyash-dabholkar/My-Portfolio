@@ -78,7 +78,7 @@ export const EDUCATION_ENTRIES: EduEntry[] = [
     location: "Vellore, Tamil Nadu",
     period: "2024 – Present",
     status: "2nd Year",
-    cgpa: "8.9 / 10",
+    cgpa: "8.95 / 10",
     cgpaNum: 89,
   },
 ];
@@ -107,10 +107,10 @@ export interface ExpEntry {
 
 export const EXPERIENCE_ENTRIES: ExpEntry[] = [
   {
-    id: "disruptive-exchange",
+    id: "disrptiv-exchange",
     type: "current",
     role: "AI Solutions Intern",
-    company: "Disruptive Exchange",
+    company: "Disrptiv Exchange",
     location: "Hybrid – Mumbai",
     period: "May 2025 – Jul 2025",
     duration: "2 mos",

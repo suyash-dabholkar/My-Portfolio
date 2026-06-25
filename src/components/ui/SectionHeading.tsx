@@ -19,7 +19,7 @@ export default function SectionHeading({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
+      <h2 className="text-3xl font-bold tracking-tight text-fg heading-glow">{title}</h2>
 
       {/* Accent underline draws in after the heading settles */}
       <motion.div
